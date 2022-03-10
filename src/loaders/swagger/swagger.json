@@ -1,0 +1,174 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "API Rest Base Repo",
+      "description": "This is a base API to start a new project",
+      "contact": {
+        "email": "you@your-company.com"
+      },
+      "license": {
+        "name": "Apache 2.0",
+        "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+      },
+      "version": "0.0.1"
+    },
+    "servers": [
+      {
+        "url": "https://localhost:3000/api/v1",
+        "description": "Development"
+      },
+      {
+        "url": "https://encodedd-node-weather-app.herokuapp.com/api/v1",
+        "description": "Production"
+      }
+    ],
+    "tags": [
+      {
+        "name": "users",
+        "description": "Users operations."
+      }
+    ],
+    "paths": {
+      "/users": {
+        "get": {
+          "tags": [
+            "users"
+          ],
+          "summary": "Get Users List",
+          "description": "",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "The users array in JSON format.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/User"
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "bad input parameter"
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "users"
+          ],
+          "summary": "Creates a new User.",
+          "description": "",
+          "requestBody": {
+            "description": "User to create.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "User created"
+            },
+            "400": {
+              "description": "Invalid input"
+            }
+          }
+        }
+      },
+      "/users/{id}": {
+        "put": {
+          "tags": [
+            "users"
+          ],
+          "summary": "Update an existing user providing the id.",
+          "description": "",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "The id of the user that needs to be updated.",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "The user was updated.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "$ref":"#/components/schemas/User" 
+                  }
+                }
+              }
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "users"
+          ],
+          "summary": "Delete an existing user providing the id.",
+          "description": "",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "The id of the user that needs to be deleted.",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "The user was deleted.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "$ref":"#/components/schemas/User" 
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "User": {
+          "required": [
+            "id",
+            "name"
+          ],
+          "type": "object",
+          "properties": {
+            "id": {
+              "description": "The user identifier.",
+              "type": "string",
+              "format": "uuid",
+              "example": "d290f1ee-6c54-4b01-90e6-d701748f0851"
+            },
+            "name": {
+              "description": "The users name.",
+              "type": "string",
+              "example": "John Wick"
+            }
+          }
+        }
+      }
+    }
+  }
