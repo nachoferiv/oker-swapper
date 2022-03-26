@@ -20,8 +20,9 @@ export default {
         path: '/api-docs',
     },
     okex: {
+        basePath: 'https://www.okex.com',
         accessKey: process.env.OKEX_ACCESS_KEY,
         secretKey: process.env.OKEX_SECRET_KEY,
-        pathprase: process.env.OKEX_PATHFRASE,
+        passphrase: process.env.OKEX_PASSPHRASE,
     },
 }

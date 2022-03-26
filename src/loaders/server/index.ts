@@ -3,12 +3,13 @@ import logger from '../logger';
 import swaggerUi from 'swagger-ui-express';
 import config from '../../config';
 import ApiError from '../../errors';
+import OkexRouter from '../../routes/okex';
 
 class ExpressServer {
     app: Application;
     port: number;
     basePath: string;
-
+    
     constructor() {
         this.app = express();
         this.port = Number(config.port);
@@ -25,7 +26,8 @@ class ExpressServer {
     _routes() {
         this.app.head('/status', (req: Request, res: Response) => {
             res.status(200).send()
-        })
+        });
+        this.app.use(this.basePath, OkexRouter);
     }
 
     _notFound() {

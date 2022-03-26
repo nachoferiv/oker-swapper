@@ -1,4 +1,4 @@
-import AppLoader from './loaders'
+import AppLoader from './loaders';
 
 const startServer = async() => { 
     AppLoader();
